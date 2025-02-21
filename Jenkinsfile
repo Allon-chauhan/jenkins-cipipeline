@@ -28,11 +28,11 @@ pipeline {
                 echo "deploying the application...."
                 echo "deploying version ${params.VERSION}"
             }
-            withCredentials([
+           /* withCredentials([
                 usernamePassword(credentials: 'server-creds', usernameVariable: USER, passwordVariable: PWD)
             ]) {
                 sh "echo ${USER}"
-            }
+            } */
         }
     }
 }
