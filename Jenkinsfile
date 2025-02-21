@@ -2,9 +2,8 @@ def gv
 
 pipeline {
     agent any
-    parameters {
-        choice(name: 'VERSION', choices: ['1.1.0', '1.2.0','1.3.0'], description: 'version options')
-        booleanParam(name: 'executeTests', defaultValue: true, description: '')
+    tools {
+        maven "maven-3.9.9"
     }
     stages {
         stage("init") {
@@ -14,7 +13,7 @@ pipeline {
                 }
             }
         }
-        stage("build") {
+        stage("build jar") {
             steps {
                 script {
                     gv.buildApp()
@@ -22,15 +21,10 @@ pipeline {
             }
         }
 
-        stage("test") {
-            when {
-                expression {
-                    params.executeTests == true
-                }
-            }
+        stage("build image") {
             steps {
                 script {
-                    gv.testApp()
+                    gv.imageApp()
                 }
             }
         }
@@ -49,11 +43,6 @@ pipeline {
                     echo "Deploying to ${ENV}"
                 }
             }
-           /* withCredentials([
-                usernamePassword(credentials: 'server-creds', usernameVariable: USER, passwordVariable: PWD)
-            ]) {
-                sh "echo ${USER}"
-            } */
         }
     }
 }
