@@ -13,7 +13,24 @@ pipeline {
                 }
             }
         }
+        stage("test") {
+            when {
+                expression {
+                    BRANCH_NAME == "testing-multibranch"
+                }
+            }
+            steps {
+                script {
+                    gv.testApp()
+                }
+            }
+        }
         stage("build jar") {
+            when {
+                expression {
+                    BRANCH_NAME == "master"
+                }
+            }
             steps {
                 script {
                     gv.buildApp()
@@ -22,6 +39,11 @@ pipeline {
         }
 
         stage("build image") {
+            when {
+                expression {
+                    BRANCH_NAME == "master"
+                }
+            }
             steps {
                 script {
                     gv.imageApp()

@@ -3,6 +3,10 @@ def buildApp() {
     sh 'mvn package'
 }
 
+def testApp() {
+    echo "testing application..."
+}
+
 def imageApp() {
     echo "building the docker image...."
     withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
