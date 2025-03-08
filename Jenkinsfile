@@ -1,4 +1,6 @@
-def gv 
+@Library('jenkins-shared-library')
+
+def gv
 
 pipeline {
     agent any
@@ -16,7 +18,7 @@ pipeline {
         stage("build jar") {
             steps {
                 script {
-                    gv.buildApp()
+                    buildApp()
                 }
             }
         }
@@ -24,7 +26,7 @@ pipeline {
         stage("build image") {
             steps {
                 script {
-                    gv.imageApp()
+                    imageApp()
                 }
             }
         }
