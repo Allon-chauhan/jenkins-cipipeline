@@ -1,9 +1,11 @@
-def gv 
+@Library('jenkins-shared-library')
 
-pipeline {
+def gv
+
+pipeline {   
     agent any
     tools {
-        maven "maven-3.9.9"
+        maven 'Maven'
     }
     stages {
         stage("init") {
@@ -13,10 +15,20 @@ pipeline {
                 }
             }
         }
+        stage("increment version") {
+            steps {
+                script {
+                    gv.incrementVersion()
+                }
+            }
+
+        }
+
         stage("build jar") {
             steps {
                 script {
-                    gv.buildApp()
+                    gv.buildJar()
+
                 }
             }
         }
@@ -24,7 +36,7 @@ pipeline {
         stage("build image") {
             steps {
                 script {
-                    gv.imageApp()
+                    gv.buildImage()
                 }
             }
         }
@@ -32,9 +44,9 @@ pipeline {
         stage("deploy") {
             steps {
                 script {
-                    gv.deployApp()
+                    deployApp()
                 }
             }
-        }
+        }               
     }
-}
+} 
