@@ -1,7 +1,5 @@
 @Library('jenkins-shared-library')
 
-def gv
-
 pipeline {   
     agent any
     tools {
@@ -44,12 +42,5 @@ pipeline {
             }
         }
 
-        stage("deploy") {
-            steps {
-                script {
-                    deployApp()
-                }
-            }
-        }               
     }
 } 
