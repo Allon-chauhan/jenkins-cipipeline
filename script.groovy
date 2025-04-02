@@ -23,16 +23,17 @@ def incrementVersion() {
 }
 
 def versionUpdate() {
-    withCredentials([[usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]])
-    sh 'git config --global user.email "jenkins@example.com'
-    sh 'git config --global user.name "allonjenkins"'
-    sh 'git status'
-    sh 'git branch'
-    sh 'git config --list'
-    sh 'git remote set-url origin https://${USER}:{PASS}@github.com/Allon-chauhan/jenkins-cipipeline.git'
-    sh 'git add .'
-    sh 'git commit -m "ci: version bump"'
-    sh 'git push origin HEAD:dynamical-increment'
+    withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+        sh 'git config --global user.email "jenkins@example.com'
+        sh 'git config --global user.name "allonjenkins"'
+        sh 'git status'
+        sh 'git branch'
+        sh 'git config --list'
+        sh 'git remote set-url origin https://${USER}:{PASS}@github.com/Allon-chauhan/jenkins-cipipeline.git'
+        sh 'git add .'
+        sh 'git commit -m "ci: version bump"'
+        sh 'git push origin HEAD:dynamical-increment'
+    }
 }
 
 return this
