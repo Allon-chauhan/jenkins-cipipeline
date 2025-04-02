@@ -24,7 +24,7 @@ def incrementVersion() {
 
 def versionUpdate() {
     withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-        sh 'git config --global user.email "jenkins@example.com'
+        sh 'git config --global user.email "jenkins@example.com"'
         sh 'git config --global user.name "allonjenkins"'
         sh 'git status'
         sh 'git branch'
